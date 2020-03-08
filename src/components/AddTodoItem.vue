@@ -9,6 +9,8 @@
     </div>
 </template>
 <script>
+import { mapMutations, mapActions } from 'vuex';
+
 export default {
   name: 'AddTodoItem',
   props: [
@@ -19,8 +21,10 @@ export default {
     };
   },
   methods: {
+    ...mapMutations('todoStore', ['addTodoItem']),
+    ...mapActions('todoStore', ['addItemToTodos']),
     addItem() {
-      this.$emit('addTodoItem', { item: this.itemDescription, checked: false });
+      this.addItemToTodos({ item: this.itemDescription });
       this.itemDescription = '';
     },
   },

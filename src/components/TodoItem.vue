@@ -12,7 +12,6 @@
                         @click="deleteItem"
                         class="glyphicon glyphicon-remove-circle pull-right">
                     </span>
-                    {{checkedItem}}
                 </div>
             </div>
       </div>
@@ -20,30 +19,30 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex';
+
 export default {
   name: 'TodoItem',
-  created() {
-    if (this.state === 2) {
-      const itemChecked = { checked: true, state: this.state, id: this.val };
-      this.$emit('itemChecked', itemChecked);
-    }
-  },
   props: ['value', 'val', 'label', 'state'],
   data() {
     return {
-      checkedItem: this.state === 2,
+      checkedItem: this.state === 'DONE',
     };
   },
   methods: {
+    ...mapMutations('todoStore', ['itemDeleted', 'itemChecked']),
+    ...mapActions('todoStore', ['checkTodoItem', 'deleteTodoItem']),
     onChange(e) {
-      const itemChecked = { checked: e.srcElement.checked, state: this.state, id: this.val };
-      this.$emit('itemChecked', itemChecked);
+      const changedState = e.srcElement.checked ? 'DONE' : 'CREATED';
+      this.checkTodoItem({
+        checked: e.srcElement.checked, state: changedState, id: this.val, item: this.label,
+      });
     },
     deleteItem() {
-      this.$emit('itemDeleted', this.val);
+      this.deleteTodoItem(this.val);
     },
     isDone() {
-      return this.state === 2 ? 'todo-done' : '';
+      return this.state === 'DONE' ? 'todo-done' : '';
     },
   },
 };
