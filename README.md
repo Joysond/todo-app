@@ -27,3 +27,11 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Clone below repository and run
+```
+https://github.com/Joysond/app
+```
+Change database port and server properties >> https://github.com/Joysond/app/blob/master/src/main/resources/application.properties#L2
+
+```spring.jpa.hibernate.ddl-auto``` value should be <b>create</b> when you run for the first time. This will create the required database tables. Change it to <b>validate</b> once the tables are created
