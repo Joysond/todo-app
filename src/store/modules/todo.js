@@ -1,6 +1,16 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 
+const API_LOCATION = 'http://localhost:8081/todo-app';
+
+function getHeaders() {
+  return {
+    headers: {
+      Authorization: localStorage.getItem('todoToken'),
+    },
+  };
+}
+
 export default {
   namespaced: true,
   state: {
@@ -36,23 +46,25 @@ export default {
   },
   actions: {
     getTodos({ commit }) {
-      axios.get('/todo/item/all')
+      axios.get(`${API_LOCATION}/item/all`)
         .then((result) => commit('updateTodos', result.data))
         .catch(console.error);
     },
     addItemToTodos({ commit }, item) {
       const tempItem = { ...item, state: 'CREATED' };
-      return axios.post('/todo/item', tempItem)
+      return axios.post(`${API_LOCATION}/item`, tempItem)
         .then((result) => commit('addTodoItem', { ...tempItem, id: result.data.id }))
         .catch(console.error);
     },
     checkTodoItem({ commit }, item) {
-      return axios.put('/todo/item', { id: item.id, state: item.state, item: item.item })
+      return axios.put(`${API_LOCATION}/item`,
+        { id: item.id, state: item.state, item: item.item },
+        getHeaders())
         .then(() => commit('itemChecked', item))
         .catch(console.error);
     },
     deleteTodoItem({ commit }, id) {
-      return axios.delete(`/todo/item/${id}`)
+      return axios.delete(`${API_LOCATION}/item/${id}`)
         .then(() => commit('itemDeleted', id))
         .catch(console.error);
     },

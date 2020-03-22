@@ -1,16 +1,14 @@
 <template>
   <div id="app">
-    <Todo/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Todo from './components/Todo.vue';
 
 export default {
   name: 'App',
   components: {
-    Todo,
   },
 };
 </script>
@@ -22,6 +20,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
