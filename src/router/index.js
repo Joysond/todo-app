@@ -5,6 +5,7 @@ import TodoContainer from '../components/TodoContainer.vue';
 import Todo from '../components/todo/Todo.vue';
 import Login from '../components/Login.vue';
 import Profile from '../components/Profile.vue';
+import Signup from '../components/Signup.vue';
 
 Vue.use(Router);
 
@@ -14,6 +15,10 @@ const router = new Router({
     path: '/login',
     name: 'Login',
     component: Login,
+  }, {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup,
   }, {
     path: '/todo',
     name: 'TodoContainer',
@@ -34,7 +39,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('todoToken') != null;
+  const isAuthenticated = localStorage.getItem('todoToken') != null || to.name === 'Signup';
   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' });
   else next();
 });

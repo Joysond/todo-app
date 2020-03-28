@@ -18,5 +18,8 @@ export default {
     login(state, login) {
       return axios.post(`${API_LOCATION}/api/auth/signin`, login);
     },
+    signup(state, signup) {
+      return axios.post(`${API_LOCATION}/api/auth/signup`, signup);
+    },
   },
 };

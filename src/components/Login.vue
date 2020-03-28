@@ -7,22 +7,12 @@
                 <form>
                     <div class="form-group">
                         <div class="input-group align-center">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-user"></i>
-                                </span>
-                            </div>
-                            <input name="" class="form-control" placeholder="Email or login"
+                            <input name="" class="form-control" placeholder="Username"
                                 type="text" v-model="loginModel.username">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group align-center">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-lock"></i>
-                                </span>
-                            </div>
                             <input class="form-control" placeholder="******" type="password"
                                 v-model="loginModel.password">
                         </div>
@@ -36,6 +26,7 @@
                         </div>
                     </div>
                     <p class="text-center"><a href="#" class="btn">Forgot password?</a></p>
+                    <router-link :to="{name: 'Signup'}" exact>Signup</router-link>
                 </form>
             </article>
         </div>
