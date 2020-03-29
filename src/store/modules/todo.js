@@ -15,6 +15,7 @@ export default {
   namespaced: true,
   state: {
     todos: [],
+    allTodos: [],
   },
   mutations: {
     updateTodos(state, items) {
@@ -43,6 +44,9 @@ export default {
         state.todos.find((item) => item.id === checkedItem.id).state = 'CREATED';
       }
     },
+    updateAllTodos(state, items) {
+      state.allTodos = items;
+    },
   },
   actions: {
     getTodos({ commit }) {
@@ -67,6 +71,13 @@ export default {
       return axios.delete(`${API_LOCATION}/item/${id}`)
         .then(() => commit('itemDeleted', id))
         .catch(console.error);
+    },
+    getAllTodos({ commit }) {
+      axios.get(`${API_LOCATION}/item/all-items`)
+        .then((result) => commit('updateAllTodos', result.data))
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

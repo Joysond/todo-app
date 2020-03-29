@@ -6,6 +6,7 @@ import Todo from '../components/todo/Todo.vue';
 import Login from '../components/Login.vue';
 import Profile from '../components/Profile.vue';
 import Signup from '../components/Signup.vue';
+import ShowAllItems from '../components/todo/ShowAllItems.vue';
 
 Vue.use(Router);
 
@@ -32,6 +33,10 @@ const router = new Router({
         name: 'Profile',
         path: 'profile',
         component: Profile,
+      }, {
+        name: 'ShowAllItems',
+        path: 'all-items',
+        component: ShowAllItems,
       },
     ],
   },

@@ -9,9 +9,4 @@ export default function setup() {
     }
     return config;
   }, (err) => Promise.reject(err));
-
-  axios.interceptors.response.use((config) => {
-    if (config.status === 401) localStorage.removeItem('todoToken');
-    return config;
-  });
 }

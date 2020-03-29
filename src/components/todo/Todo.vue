@@ -4,6 +4,9 @@
       <TodoItem :val="todo.id" :label="todo.item" :state="todo.state" />
     </div>
     <AddTodoItem />
+    <div v-if="isAdmin">
+      <router-link :to="{name: 'ShowAllItems'}" exact>Show All Items in the System</router-link>
+    </div>
   </div>
 </template>
 
@@ -21,6 +24,14 @@ export default {
   computed: {
     todos() {
       return this.$store.state.todoStore.todos;
+    },
+    isAdmin() {
+      const { roles } = JSON.parse(localStorage.getItem('loginInfo'));
+      let isAdmin = false;
+      roles.forEach((role) => {
+        if (role === 'ROLE_ADMIN') isAdmin = true;
+      });
+      return isAdmin;
     },
   },
   methods: {

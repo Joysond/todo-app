@@ -54,6 +54,12 @@ export default {
         .then((result) => {
           this.updateLocalStore(result.data);
           this.$router.push('/todo/items');
+          this.$notify({
+            group: 'todo',
+            type: 'success',
+            title: 'Greetings',
+            text: `Hello ${this.loginModel.username}! Greetings from TODO App!`,
+          });
         }).catch(console.error);
     },
   },
