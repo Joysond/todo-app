@@ -1,5 +1,5 @@
 # todo-app
-
+![vue-todo](vue-todo-2.gif)
 ## Project setup
 ```
 npm install
